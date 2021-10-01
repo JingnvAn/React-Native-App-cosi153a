@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-import NavDemo1 from './practiceComponents/Navbar';
+import NavBar from './components/Navbar';
 
 export default function App() {
   return(
-    <Text>Hello</Text>
+    <>
+      <NavBar></NavBar>
+    </>
   )
 }
 
