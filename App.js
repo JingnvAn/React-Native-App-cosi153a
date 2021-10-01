@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-import NavBar from './components/Navbar';
+import NavigationStack from './components/NavigationStack';
 
 export default function App() {
   return(
     <>
-      <NavBar></NavBar>
+      <NavigationStack></NavigationStack>
     </>
   )
 }
