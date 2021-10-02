@@ -33,7 +33,6 @@ const HomeScreen = ({ navigation }) => {
         <Button
           title="Split Expenses"
           color="#ED50F1"
-          
           onPress={() => navigation.navigate('Split') }
         />
         <Button
@@ -46,6 +45,7 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const AboutScreen = ({ navigation, route }) => {
+
   return (  
     <About name={'Jingnu'}></About>   
   );
