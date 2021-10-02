@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Text, Image, Button} from "react-native";
+import { View, StyleSheet, TextInput, Text, Image, Button, ImageBackground} from "react-native";
 
 const About = ({ name }) => {
     const [userName, setUserName] = React.useState(name || "");
@@ -8,7 +8,7 @@ const About = ({ name }) => {
         <>
             <View style={styles.container}>
                 <View style={styles.imageBox}>
-                    <Image style={styles.image} resizeMode='cover' source={require('../assets/cartonProfilePic-circle.png')} />
+                    <ImageBackground style={styles.image} resizeMode='cover' source={require('../assets/cartonProfilePic-circle.png')} />
                 </View>  
                 <View style={styles.userInfo}>
                     <Text style={styles.name}>{userName}</Text>
@@ -44,15 +44,15 @@ const styles = StyleSheet.create({
     },
     image: {
         justifyContent: "center",
-        width: 150,
-        height:150,
+        width: 120,
+        height:120,
     },
     imageBox: {
         flex: 1,
         justifyContent:'center',
         alignItems:'center',
         marginTop: 50,
-        marginBottom:40,
+        marginBottom:5,
     },
     userInfo: {
         flex: 1,

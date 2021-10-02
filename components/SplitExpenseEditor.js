@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Text, ImageBackground, Button} from "react-native";
+import { View, StyleSheet, TextInput, Text, Button, ImageBackground} from "react-native";
 
 const SplitExpenseEditor = () => {
     const [text, onChangeText] = React.useState("");
@@ -8,28 +8,25 @@ const SplitExpenseEditor = () => {
     // const [partnerName, setPartnerName] = React.useState("Chris");
     const userName = 'Jingnu';
     const partnerName = 'Chris';
+
     return (
         <>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.headerProfile}>
                         <View style={styles.image}>
-                            
-                        </View>
-                        <View style={styles.name}>
-                            <Text style={styles.name}>{userName}</Text>
-                        </View>
+                            <ImageBackground source={require('../assets/cartonProfilePic-circle.png')} resizeMode="cover" style={styles.image} />
+                        </View>   
+                        <Text style={styles.name}>{userName}</Text>                        
                     </View>
                     <View style={styles.headerDirection}>
 
                     </View>
                     <View style={styles.headerProfile}>
-                        <View style={styles.picture}>
-
+                        <View style={styles.image}>
+                            <ImageBackground source={require('../assets/chris-circle.png')} resizeMode="cover" style={styles.image} /> 
                         </View>
-                        <View style={styles.name}>
-                            <Text style={styles.name}>{partnerName}</Text>
-                        </View>
+                        <Text style={styles.name}>{partnerName}</Text>                        
                     </View>
                 </View>
                 <View style={styles.inputBoxes}>
@@ -89,18 +86,19 @@ const styles = StyleSheet.create({
     headerProfile: {
         flexDirection: 'column',
         flex:2,    
+        alignItems: 'center'
     },
     image: {
         justifyContent: "center",
-        width: 150,
-        height:150,
+        width: 50,
+        height:50,
+        marginBottom: 5,
     },
     headerDirection: {
         flex:3
     },
     name: {
-        fontSize: 30,
-        color: 'grey'
+        fontSize: 18,
     },
     buttonBox: {
         padding: 10,
