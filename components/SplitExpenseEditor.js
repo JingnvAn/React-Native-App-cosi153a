@@ -10,57 +10,57 @@ const SplitExpenseEditor = () => {
     const partnerName = 'Chris';
 
     return (
-        <>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.headerProfile}>
-                        <View style={styles.image}>
-                            <ImageBackground source={require('../assets/cartonProfilePic-circle.png')} resizeMode="cover" style={styles.image} />
-                        </View>   
-                        <Text style={styles.name}>{userName}</Text>                        
-                    </View>
-                    <View style={styles.headerDirection}>
+        
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <View style={styles.headerProfile}>
+                    <View style={styles.image}>
+                        <ImageBackground source={require('../assets/cartonProfilePic-circle.png')} resizeMode="cover" style={styles.image} />
+                    </View>   
+                    <Text style={styles.name}>{userName}</Text>                        
+                </View>
+                <View style={styles.headerDirection}>
 
-                    </View>
-                    <View style={styles.headerProfile}>
-                        <View style={styles.image}>
-                            <ImageBackground source={require('../assets/chris-circle.png')} resizeMode="cover" style={styles.image} /> 
-                        </View>
-                        <Text style={styles.name}>{partnerName}</Text>                        
-                    </View>
                 </View>
-                <View style={styles.inputBoxes}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeText}
-                        value={text}
-                        placeholder="Description"
-                        keyboardType="text"
-                    />
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeNumber}
-                        value={number}
-                        placeholder="Total Amount. We'll do the calculation for you"
-                        keyboardType="numeric"
-                    />
-                </View>
-                <View style={styles.buttonBox}>
-                    <View style={styles.button}>
-                        <Button
-                            title= "cancel"
-                            color="#FDB9FC"
-                        />
+                <View style={styles.headerProfile}>
+                    <View style={styles.image}>
+                        <ImageBackground source={require('../assets/chris-circle.png')} resizeMode="cover" style={styles.image} /> 
                     </View>
-                    <View style={styles.button}>
-                        <Button
-                            title= "save"
-                            color="#ED50F1"
-                        /> 
-                    </View>  
+                    <Text style={styles.name}>{partnerName}</Text>                        
                 </View>
             </View>
-        </>
+            <View style={styles.inputBoxes}>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeText}
+                    value={text}
+                    placeholder="Description"
+                    keyboardType="text"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    placeholder="Total Amount. We'll do the calculation for you"
+                    keyboardType="numeric"
+                />
+            </View>
+            <View style={styles.buttonBox}>
+                <View style={styles.button}>
+                    <Button
+                        title= "cancel"
+                        color="#FDB9FC"
+                    />
+                </View>
+                <View style={styles.button}>
+                    <Button
+                        title= "save"
+                        color="#ED50F1"
+                    /> 
+                </View>  
+            </View>
+        </View>
+
     )
 }
 

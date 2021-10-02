@@ -5,34 +5,32 @@ const About = ({ name }) => {
     const [userName, setUserName] = React.useState(name || "");
 
     return (
-        <>
-            <View style={styles.container}>
-                <View style={styles.imageBox}>
-                    <ImageBackground style={styles.image} resizeMode='cover' source={require('../assets/cartonProfilePic-circle.png')} />
-                </View>  
-                <View style={styles.userInfo}>
-                    <Text style={styles.name}>{userName}</Text>
-                </View>
-                <View style={styles.setting}>
-                    <Button 
-                        title='Edit display name'
-                        color="#ED50F1"
-                    />
-                    <Button 
-                        title='Change profile picture'
-                        color="#ED50F1"
-                    />
-                    <Button 
-                        title='Reset password'
-                        color="#ED50F1"
-                    />
-                    <Button 
-                        title='Logout'
-                        color="#ED50F1"
-                    />
-                </View>
+        <View style={styles.container}>
+            <View style={styles.imageBox}>
+                <ImageBackground style={styles.image} resizeMode='cover' source={require('../assets/cartonProfilePic-circle.png')} />
+            </View>  
+            <View style={styles.userInfo}>
+                <Text style={styles.name}>{userName}</Text>
             </View>
-        </>
+            <View style={styles.setting}>
+                <Button 
+                    title='Edit display name'
+                    color="#ED50F1"
+                />
+                <Button 
+                    title='Change profile picture'
+                    color="#ED50F1"
+                />
+                <Button 
+                    title='Reset password'
+                    color="#ED50F1"
+                />
+                <Button 
+                    title='Logout'
+                    color="#ED50F1"
+                />
+            </View>
+        </View>
     )
 }
 
