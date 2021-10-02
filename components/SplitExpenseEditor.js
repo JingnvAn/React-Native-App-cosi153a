@@ -13,7 +13,7 @@ const SplitExpenseEditor = () => {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.headerProfile}>
-                        <View style={styles.picture}>
+                        <View style={styles.image}>
                             
                         </View>
                         <View style={styles.name}>
@@ -69,9 +69,9 @@ const SplitExpenseEditor = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 12,
         alignItems: 'stretch',
-        justifyContent:'stretch',
+        justifyContent:'strech',
     },
     inputBoxes: {
         flexDirection: "column",
@@ -89,6 +89,11 @@ const styles = StyleSheet.create({
     headerProfile: {
         flexDirection: 'column',
         flex:2,    
+    },
+    image: {
+        justifyContent: "center",
+        width: 150,
+        height:150,
     },
     headerDirection: {
         flex:3
