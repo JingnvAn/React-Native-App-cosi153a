@@ -28,44 +28,37 @@ const HomeScreen = ({ navigation }) => {
         <Button
           title="About"
           color="#ED50F1"
-          onPress={() => navigation.navigate('About', { name: 'Jane', greeting:'Hi!' })}
+          onPress={() => navigation.navigate('About') }
         />
         <Button
           title="Split Expenses"
           color="#ED50F1"
           
-          onPress={() => navigation.navigate('Split')}
+          onPress={() => navigation.navigate('Split') }
         />
         <Button
           title="ChatRoom"
           color="#ED50F1"
-          onPress={() =>
-            navigation.navigate('Chat', { name: 'Tim', greeting:'Konichi-wa' })
-          }
+          onPress={() =>navigation.navigate('Chat') }
         />
     </View>
   );
 };
 
 const AboutScreen = ({ navigation, route }) => {
-  return (
-    
-    <About name={'Jingnu'}></About>
-    
+  return (  
+    <About name={'Jingnu'}></About>   
   );
 };
 
 const ChatScreen = ({ navigation, route }) => {
   return (
- 
      <ChatRoom></ChatRoom>
-
   );
 };
 
 const SplitScreen = ({navigation, route}) => {
   return (
-
       <SplitExpenseEditor></SplitExpenseEditor>
   )
 }
