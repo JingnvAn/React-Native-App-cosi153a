@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",   
-        alignItems: 'strech',
+        alignItems: 'stretch',
     },
     messageBox: {
         flex: 4,

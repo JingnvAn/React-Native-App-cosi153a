@@ -67,8 +67,8 @@ const SplitExpenseEditor = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 12,
-        alignItems: 'stretch',
-        justifyContent:'strech',
+        alignItems: "stretch",
+        justifyContent: 'space-around',
     },
     inputBoxes: {
         flexDirection: "column",

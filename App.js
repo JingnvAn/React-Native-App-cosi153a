@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import NavigationStack from './components/NavigationStack';
+import Quiz2 from './practiceComponents/Quiz2';
+import Profile from './practiceComponents/Profile';
 
 export default function App() {
   return(
-    <NavigationStack></NavigationStack>
+    // <NavigationStack></NavigationStack>
+    <Quiz2></Quiz2>
+    //<Profile></Profile>
   )
 }
 
