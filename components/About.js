@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, TextInput, Text, Image, Button, ImageBackground} from "react-native";
 
 const About = ({ name }) => {
-    const [userName, setUserName] = React.useState(name || "");
+    const [userName, setUserName] = React.useState(name || "Jingnu");
 
     return (
         <View style={styles.container}>
@@ -15,7 +15,7 @@ const About = ({ name }) => {
             <View style={styles.setting}>
                 <Button 
                     title='Edit display name'
-                    color="#ED50F1"
+                    color="#ED50F1"                   
                 />
                 <Button 
                     title='Change profile picture'
