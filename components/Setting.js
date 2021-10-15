@@ -1,7 +1,10 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Text, Image, Button, ImageBackground} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Setting = ({ name, email, password }) => {
+const Setting = ({ name, email, password, image }) => {
+    const [info, setInfo] = React.useState({storedUserName: '', storedUserEmail:'', storedUserPassword: '', storedImageName: 'cartonProfilePic-circle'});
+
     const [userName, setUserName] = React.useState(name || "Jingnu");
     const [userEmail, setUserEmail] = React.useState(email || 'no email provided :(');
     const [userPassword, setUserPassword] = React.useState(password || '12345');
@@ -12,21 +15,76 @@ const Setting = ({ name, email, password }) => {
     const [inputEmail, setInputEmail] = React.useState('');
     const [inputPassword, setInputPassword] = React.useState('');
 
-    const onSave = () => {
-        if(inputName != '')
-            setUserName(inputName);
-        if(inputEmail != '')
-            setUserEmail(inputEmail);
-        if(inputPassword != '')
-            setUserPassword(inputPassword);
-        if(inputImageName != '')
-            setImageName(inputImageName);
 
-        setInputImageName('');
-        setInputName('');
-        setInputEmail('');
-        setInputPassword('');
+    React.useEffect(() => {getData()}
+    ,[])
+
+    const getData = async () => {
+        try {
+          const jsonValue = await AsyncStorage.getItem('@user_info')
+          let data = null
+          if (jsonValue!=null) {
+            data = JSON.parse(jsonValue);
+            setInfo(data);
+            setUserName(data.storedUserName);
+            setUserEmail(data.storedUserEmail);
+            setUserPassword(data.storedUserPassword);
+            setImageName(data.storedImageName);
+            
+            console.log('just set Info', data)
+          } else {
+            console.log('just read a null value from Storage')
+            setInfo({});
+            setUserName('');
+            setUserEmail('');
+            setUserPassword('');
+            setImageName('cartonProfilePic-circle');
+          }
+
+
+        } catch(e) {
+          console.log("error in getData ")
+          console.dir(e)
+          // error reading value
+        }
+  }
+
+  // storeData converts the value stored in the info variable to a string
+  // which is then writes into local storage using AsyncStorage.setItem.
+  const storeData = async (value) => {
+    try {
+    const jsonValue = JSON.stringify(value);
+    console.log('about to store: ',jsonValue)
+    await AsyncStorage.setItem('@user_info', jsonValue)
+    console.log('just stored '+ jsonValue)
+    } catch (e) {
+    console.log("error in storeData ")
+    console.dir(e)
+    // saving error
     }
+}
+
+  const onSave = () => {
+    if(inputName != '')
+        setUserName(inputName);
+    if(inputEmail != '')
+        setUserEmail(inputEmail);
+    if(inputPassword != '')
+        setUserPassword(inputPassword);
+    if(inputImageName != '')
+        setImageName(inputImageName);
+
+    setInputImageName('');
+    setInputName('');
+    setInputEmail('');
+    setInputPassword('');
+  }
+
+  const onStore = () => {
+    const info = {storedUserName: userName, storedUserEmail: userEmail, storedUserPassword: userPassword, storedImageName: imageName}
+    storeData(info);
+  }
+
 
     return (
         <View style={styles.container}>
@@ -51,25 +109,19 @@ const Setting = ({ name, email, password }) => {
                     color="#ED50F1"
                     onPress={onSave}
                 />
+                <br />
+                <Button 
+                    title='store'
+                    color="#ED50F1"
+                    onPress={onStore}
+                />
                 
             </View>
         </View>
     )
 }
 
-// storeData converts the value stored in the info variable to a string
-  // which is then writes into local storage using AsyncStorage.setItem.
-  const storeData = async (value) => {
-    try {
-    const jsonValue = JSON.stringify(value)
-    await AsyncStorage.setItem('@quiz_info', jsonValue)
-    console.log('just stored '+jsonValue)
-    } catch (e) {
-    console.log("error in storeData ")
-    console.dir(e)
-    // saving error
-    }
-}
+
 
 const styles = StyleSheet.create({
     container: {

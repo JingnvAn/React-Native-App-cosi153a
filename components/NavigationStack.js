@@ -6,7 +6,6 @@ import SplitExpenseEditor from './SplitExpenseEditor'
 import Setting from './Setting';
 import ChatRoom from './ChatRoom';
 import UserInfoLandingPage from './UserInfoLandingPage';
-import Login from './Login';
 
 const buttonColor = "#ED50F1";
 // All of the route configuration is specified as props to our navigator.
