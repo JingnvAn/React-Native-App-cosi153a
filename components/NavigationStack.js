@@ -10,6 +10,8 @@ import ChatRoom from './ChatRoom';
 const {Screen, Navigator} = createNativeStackNavigator(); 
 
 const NavigationStack = () => {
+  const [userName, setUserName] = React.useState('Jingnu');
+
   return (
     <NavigationContainer>
       <Navigator> 
@@ -47,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
 const AboutScreen = ({ navigation, route }) => {
 
   return (  
-    <About name={'Jingnu'}></About>   
+    <About name={userName}></About>   
   );
 };
 

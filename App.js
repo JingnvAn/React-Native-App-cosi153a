@@ -6,9 +6,9 @@ import Profile from './practiceComponents/Profile';
 
 export default function App() {
   return(
-    // <NavigationStack></NavigationStack>
-    <Quiz2></Quiz2>
-    //<Profile></Profile>
+    <NavigationStack></NavigationStack>
+    // <Quiz2></Quiz2>
+    // <Profile></Profile>
   )
 }
 
