@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useContext} from "react";
 import { View, StyleSheet, ImageBackground, Text} from "react-native";
 
-const UserInfoLandingPage = ({userName}) => {
+const UserInfoLandingPage = ({name}) => {
     return(
         <View style={styles.container}>
             <View style={styles.imageBox}>
                 <ImageBackground style={styles.image} resizeMode='cover' source={require('../assets/cartonProfilePic-circle.png')} />
             </View>  
             <View style={styles.userInfo}>
-                <Text style={styles.name}>{userName}</Text>
+                <Text style={styles.name}>{name}</Text>
             </View>
         </View>
     )

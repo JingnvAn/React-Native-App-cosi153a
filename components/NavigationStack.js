@@ -3,9 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View, Button, } from 'react-native';
 import SplitExpenseEditor from './SplitExpenseEditor'
-import About from './About';
+import Setting from './Setting';
 import ChatRoom from './ChatRoom';
 import UserInfoLandingPage from './UserInfoLandingPage';
+import Login from './Login';
 
 const buttonColor = "#ED50F1";
 // All of the route configuration is specified as props to our navigator.
@@ -20,7 +21,7 @@ const NavigationStack = () => {
       <UserInfoContext.Provider value= {userName}>
         <Navigator> 
           <Screen name="Home" component={HomeScreen} options={{ title: 'Welcome to Split' }}/>
-          <Screen name="About" component={AboutScreen} />
+          <Screen name="Setting" component={SettingScreen} />
           <Screen name="Chat" component={ChatScreen} />
           <Screen name="Split" component={SplitScreen} />
         </Navigator>
@@ -33,11 +34,14 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={{flexDirection: 'column'}}>
       <UserInfoContext.Provider>
+        <View style={{ flexDirection: 'column'}}>
+            <UserInfoLandingPage name={'Jingnu'}></UserInfoLandingPage>  
+        </View>
         <View style={styles.homeScreen}>
           <Button
-            title="About"
+            title="Setting"
             color={buttonColor}
-            onPress={() => navigation.navigate('About') }
+            onPress={() => navigation.navigate('Setting') }
           />
           <Button
             title="Split Expenses"
@@ -50,17 +54,14 @@ const HomeScreen = ({ navigation }) => {
             onPress={() =>navigation.navigate('Chat') }
           />
         </View>
-        <View style={{flexDirection: 'column'}}>
-            <UserInfoLandingPage></UserInfoLandingPage>
-        </View>
       </UserInfoContext.Provider>   
     </View>    
   );
 };
 
-const AboutScreen = ({ navigation, route }) => {
+const SettingScreen = ({ navigation, route }) => {
   return (  
-    <About></About>   
+    <Setting></Setting>   
   );
 };
 

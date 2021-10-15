@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Text, Image, Button, ImageBackground} from "react-native";
 
-const About = ({ name }) => {
+const Setting = ({ name }) => {
     const [userName, setUserName] = React.useState(name || "Jingnu");
 
     return (
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default About;
+export default Setting;
