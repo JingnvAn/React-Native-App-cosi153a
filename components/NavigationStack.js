@@ -61,7 +61,22 @@ const HomeScreen = ({ navigation }) => {
 
 const SettingScreen = ({ navigation, route }) => {
   return (  
-    <Setting></Setting>   
+    <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+      
+        <Setting></Setting>
+      
+      <View style={{flexDirection: 'row'}}>
+        <View style={{flex: 1}}></View>
+        <Button 
+          title='back to home'
+          color="#FDB9FC"
+          onPress={() =>navigation.navigate('Home') }
+        />
+        <View style={{flex: 1}}></View>
+      </View>
+    </View>
+    
+       
   );
 };
 
