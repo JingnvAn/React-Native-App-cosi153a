@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, Button, } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, } from 'react-native';
 import SplitExpenseEditor from './SplitExpenseEditor'
 import Setting from './Setting';
 import ChatRoom from './ChatRoom';
@@ -10,11 +10,12 @@ import UserInfoLandingPage from './UserInfoLandingPage';
 const buttonColor = "#ED50F1";
 // All of the route configuration is specified as props to our navigator.
 const {Screen, Navigator} = createNativeStackNavigator(); 
-const UserInfoContext = React.createContext('Jingnu');
+
 
 const NavigationStack = () => {
-  const [userName, setUserName] = React.useState('Jingnu');
-  
+  const [userName, setUserName] = React.useState('Jingnu An');
+  const UserInfoContext = React.createContext(userName);
+
   return (
     <NavigationContainer>
       <UserInfoContext.Provider value= {userName}>
@@ -23,18 +24,20 @@ const NavigationStack = () => {
           <Screen name="Setting" component={SettingScreen} />
           <Screen name="Chat" component={ChatScreen} />
           <Screen name="Split" component={SplitScreen} />
-        </Navigator>
-      </UserInfoContext.Provider>
+        </Navigator> 
+      </UserInfoContext.Provider>  
     </NavigationContainer>
   );
 };
 
 const HomeScreen = ({ navigation }) => {
+  
+
   return (
-    <View style={{flexDirection: 'column'}}>
-      <UserInfoContext.Provider>
+    
+      <View style={{flexDirection: 'column'}}>
         <View style={{ flexDirection: 'column'}}>
-            <UserInfoLandingPage name={'Jingnu'}></UserInfoLandingPage>  
+            <UserInfoLandingPage name={'Jingnu An'}></UserInfoLandingPage> 
         </View>
         <View style={styles.homeScreen}>
           <Button
@@ -52,9 +55,9 @@ const HomeScreen = ({ navigation }) => {
             color={buttonColor}
             onPress={() =>navigation.navigate('Chat') }
           />
-        </View>
-      </UserInfoContext.Provider>   
-    </View>    
+        </View>  
+      </View>  
+    
   );
 };
 
@@ -62,7 +65,7 @@ const SettingScreen = ({ navigation, route }) => {
   return (  
     <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
       
-        <Setting></Setting>
+        <Setting name={'Jingnu An'}></Setting>
       
       <View style={{flexDirection: 'row'}}>
         <View style={{flex: 1}}></View>
@@ -97,7 +100,13 @@ const styles = StyleSheet.create({
         margin:"25px",
         padding:'10px',
         justifyContent: 'space-around',
-    }
+    },
+    input: {
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+    },
   });
 
 

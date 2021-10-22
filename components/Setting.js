@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, Image, Button, ImageBackground} from
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Setting = ({ name, email, password, image }) => {
-    const [info, setInfo] = React.useState({storedUserName: '', storedUserEmail:'', storedUserPassword: '', storedImageName: 'cartonProfilePic-circle'});
+    const [info, setInfo] = React.useState({storedUserName: name, storedUserEmail:email || '', storedUserPassword: password || '', storedImageName: 'cartonProfilePic-circle'});
 
     const [userName, setUserName] = React.useState(name || "Jingnu");
     const [userEmail, setUserEmail] = React.useState(email || 'no email provided :(');
@@ -89,7 +89,7 @@ const Setting = ({ name, email, password, image }) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageBox}>
-                <ImageBackground style={styles.image} resizeMode='cover' source={require(`../assets/${imageName}.png`)} />
+                <ImageBackground style={styles.image} resizeMode='cover' source={require(`../assets/cartonProfilePic-circle.png`)} />
             </View>  
             <View style={{flexDirection: 'column', flex: 1}}>
                 <Text style={styles.name}><Text style={styles.guidingText}>Username:</Text> {userName}</Text>
