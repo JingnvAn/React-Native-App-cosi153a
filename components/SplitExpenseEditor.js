@@ -1,16 +1,61 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Text, Button, ImageBackground} from "react-native";
+import { View, StyleSheet, TextInput, Text, Button, ImageBackground, FlatList} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplitExpenseEditor = () => {
-    const [text, onChangeText] = React.useState("");
-    const [number, onChangeNumber] = React.useState();
-    // const [userName, setUserName] = React.useState("Jingnu");
-    // const [partnerName, setPartnerName] = React.useState("Chris");
     const userName = 'Jingnu';
     const partnerName = 'Chris';
+    const [text, onChangeText] = React.useState("");
+    const [number, onChangeNumber] = React.useState(0);
+    const [logs, setLogs] = React.useState([]);
 
-    return (
-        
+
+    React.useEffect(() => {
+        getData();
+    },[])
+
+    const getData = async () => {
+        try {
+          const jsonValue = await AsyncStorage.getItem('@log_info');
+          let data = null
+          if (jsonValue!=null || jsonValue.length != 0) {
+            data = JSON.parse(jsonValue);
+            setLogs(data);
+            console.log('just set logs', data);
+          } else {
+            console.log('just read a null value from Storage');
+          }
+        } catch(e) {
+          console.log("error in getData ")
+          console.dir(e)
+        }
+  }
+
+    // storeData converts the value stored in the info variable to a string
+    // which is then writes into local storage using AsyncStorage.setItem.
+    const storeData = async (value) => {
+        try {
+            const jsonValue = JSON.stringify(value);
+            await AsyncStorage.setItem('@log_info', jsonValue)
+            console.log('just stored '+ jsonValue)
+        } catch (e) {
+            console.log("error in storeData ")
+            console.dir(e)
+        }
+    }
+
+    const onPressCancel = () => {
+        onChangeText('');
+        onChangeNumber(0);
+    }
+
+    const onPressSave = () => {
+        const temp = {description: text, amount:number, from:userName, to:partnerName}
+        storeData(temp);
+        console.log(temp)
+    }
+
+    return (    
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerProfile}>
@@ -30,13 +75,17 @@ const SplitExpenseEditor = () => {
                 </View>
             </View>
             <View style={styles.inputBoxes}>
+                <Text style={{fontSize: 15, fontWeight: '600'}}>Add a new Split event</Text>
+                <br />
+                <Text>Description</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeText}
                     value={text}
                     placeholder="Description"
-                    keyboardType="text"
+                    keyboardType="twitter"
                 />
+                <Text>Amount</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeNumber}
@@ -44,18 +93,28 @@ const SplitExpenseEditor = () => {
                     placeholder="Total Amount. We'll do the calculation for you"
                     keyboardType="numeric"
                 />
+                <br />
+                <Text style={{fontSize: 15, fontWeight: '600'}}>Recent Activites</Text>
+            </View>
+            <View styles= {styles.logsBox}>
+                <FlatList
+                        data={logs}
+                        renderItem={({item}) => <Text style={styles.item}>{item.from} transfered ${item.amount} to {item.to}, for {item.description}</Text>}
+                    />
             </View>
             <View style={styles.buttonBox}>
                 <View style={styles.button}>
                     <Button
                         title= "cancel"
                         color="#FDB9FC"
+                        onPress={onPressCancel}
                     />
                 </View>
                 <View style={styles.button}>
                     <Button
                         title= "save"
                         color="#ED50F1"
+                        onPress={onPressSave}
                     /> 
                 </View>  
             </View>
@@ -72,6 +131,15 @@ const styles = StyleSheet.create({
     },
     inputBoxes: {
         flexDirection: "column",
+    },
+    logsBox: {
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
     },
     input: {
         height: 40,

@@ -31,14 +31,8 @@ const NavigationStack = () => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  
-
-  return (
-    
+  return (   
       <View style={{flexDirection: 'column'}}>
-        <View style={{ flexDirection: 'column'}}>
-            <UserInfoLandingPage name={'Jingnu An'}></UserInfoLandingPage> 
-        </View>
         <View style={styles.homeScreen}>
           <Button
             title="Setting"
@@ -96,10 +90,10 @@ const SplitScreen = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
     homeScreen:{
-        flexDirection: 'row',
-        margin:"25px",
-        padding:'10px',
-        justifyContent: 'space-around',
+      flex:1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-end',
     },
     input: {
       height: 40,
