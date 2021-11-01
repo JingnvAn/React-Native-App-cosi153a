@@ -9,9 +9,9 @@ import Quiz3 from './practiceComponents/Quiz3';
 export default function App() {
   return(
     <>
-      {/* <NavigationStack></NavigationStack> */}
+      <NavigationStack></NavigationStack>
       {/* <ExpenableText title='A' text='this is the expanable text'></ExpenableText> */}
-      <Quiz3></Quiz3>
+      {/* <Quiz3></Quiz3> */}
     </>
   )
 }

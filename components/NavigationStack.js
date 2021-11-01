@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, Button, TextInput, } from 'react-native';
 import SplitExpenseEditor from './SplitExpenseEditor'
 import Setting from './Setting';
 import ChatRoom from './ChatRoom';
-import UserInfoLandingPage from './UserInfoLandingPage';
 
 const buttonColor = "#ED50F1";
 // All of the route configuration is specified as props to our navigator.
@@ -31,14 +30,8 @@ const NavigationStack = () => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  
-
-  return (
-    
+  return (   
       <View style={{flexDirection: 'column'}}>
-        <View style={{ flexDirection: 'column'}}>
-            <UserInfoLandingPage name={'Jingnu An'}></UserInfoLandingPage> 
-        </View>
         <View style={styles.homeScreen}>
           <Button
             title="Setting"
@@ -96,10 +89,10 @@ const SplitScreen = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
     homeScreen:{
-        flexDirection: 'row',
-        margin:"25px",
-        padding:'10px',
-        justifyContent: 'space-around',
+      flex:1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-end',
     },
     input: {
       height: 40,
