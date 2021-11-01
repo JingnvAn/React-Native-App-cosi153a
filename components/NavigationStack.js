@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Button, TextInput, } from 'react-native';
 import SplitExpenseEditor from './SplitExpenseEditor'
 import Setting from './Setting';
 import ChatRoom from './ChatRoom';
+import UserInfoLandingPage from './UserInfoLandingPage';
 
 const buttonColor = "#ED50F1";
 // All of the route configuration is specified as props to our navigator.

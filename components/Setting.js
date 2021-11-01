@@ -109,6 +109,7 @@ const Setting = ({ name, email, password, image }) => {
                     color="#ED50F1"
                     onPress={onSave}
                 />
+                <br />
                 <Button 
                     title='store'
                     color="#ED50F1"
