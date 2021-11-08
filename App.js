@@ -5,13 +5,16 @@ import Quiz2 from './practiceComponents/Quiz2';
 import Profile from './practiceComponents/Profile';
 import ExpenableText from './components/ExpenableText';
 import Quiz3 from './practiceComponents/Quiz3';
+import CovidDemo from './practiceComponents/CovidDemo';
+import Quiz4 from './practiceComponents/Quiz4';
 
 export default function App() {
   return(
     <>
-      <NavigationStack></NavigationStack>
+      {/* <NavigationStack></NavigationStack> */}
       {/* <ExpenableText title='A' text='this is the expanable text'></ExpenableText> */}
       {/* <Quiz3></Quiz3> */}
+      <Quiz4 />
     </>
   )
 }
