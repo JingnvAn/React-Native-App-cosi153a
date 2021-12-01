@@ -70,9 +70,7 @@ const SettingScreen = ({ navigation, route }) => {
         />
         <View style={{flex: 1}}></View>
       </View>
-    </View>
-    
-       
+    </View>     
   );
 };
 

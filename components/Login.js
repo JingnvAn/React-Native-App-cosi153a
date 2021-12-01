@@ -1,28 +1,14 @@
 
    
 import React, { useState } from "react";
-import {View,Text,TextInput} from 'react-native';
+import {View,Text,TextInput, SafeAreaView, Button} from 'react-native';
 import {useValue} from './ValueContext';
 
-const Login = () => {
-   const [eAdd,setEAdd] = useState("");
-   let {currentValue,setCurrentValue} = useValue()
+const Login = ({ navigation }) => {
    return(
-      <View>
-         <TextInput
-              placeholder="What's your email address? "
-              value={currentValue.email}
-              onChangeText={text =>{
-
-                 setCurrentValue(
-                    {name:currentValue.name,
-                     email:text})
-                  }}
-         />
-         <Text style={{fontSize:50}}>
-           your email is: {eAdd}
-         </Text>
-      </View>
+      <SafeAreaView>
+         <Button title='Go back' onPress={() => navigation.goBack()} />
+      </SafeAreaView>
    )
 }
 

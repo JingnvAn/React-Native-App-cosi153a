@@ -2,9 +2,9 @@ import React from "react";
 import { View, StyleSheet, TextInput, Text, Button, ImageBackground, FlatList} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SplitExpenseEditor = () => {
-    const userName = 'Jingnu';
-    const partnerName = 'Chris';
+const SplitExpenseEditor = ({ navigation, me, partner }) => {
+    // const userName = 'Jingnu';
+    // const partnerName = 'Chris';
     const [text, onChangeText] = React.useState("");
     const [number, onChangeNumber] = React.useState(0);
     const [logs, setLogs] = React.useState([]);
@@ -44,13 +44,8 @@ const SplitExpenseEditor = () => {
         }
     }
 
-    const onPressCancel = () => {
-        onChangeText('');
-        onChangeNumber(0);
-    }
-
     const onPressSave = () => {
-        const temp = {description: text, amount:number, from:userName, to:partnerName}
+        const temp = {description: text, amount:number, from:me, to:partner}
         storeData(temp);
         console.log(temp)
     }
@@ -62,7 +57,7 @@ const SplitExpenseEditor = () => {
                     <View style={styles.image}>
                         <ImageBackground source={require('../assets/cartonProfilePic-circle.png')} resizeMode="cover" style={styles.image} />
                     </View>   
-                    <Text style={styles.name}>{userName}</Text>                        
+                    <Text style={styles.name}>{me}</Text>                        
                 </View>
                 <View style={styles.headerDirection}>
 
@@ -71,12 +66,11 @@ const SplitExpenseEditor = () => {
                     <View style={styles.image}>
                         <ImageBackground source={require('../assets/chris-circle.png')} resizeMode="cover" style={styles.image} /> 
                     </View>
-                    <Text style={styles.name}>{partnerName}</Text>                        
+                    <Text style={styles.name}>{partner}</Text>                        
                 </View>
             </View>
             <View style={styles.inputBoxes}>
                 <Text style={{fontSize: 15, fontWeight: '600'}}>Add a new Split event</Text>
-                <br />
                 <Text>Description</Text>
                 <TextInput
                     style={styles.input}
@@ -93,7 +87,6 @@ const SplitExpenseEditor = () => {
                     placeholder="Total Amount. We'll do the calculation for you"
                     keyboardType="numeric"
                 />
-                <br />
                 <Text style={{fontSize: 15, fontWeight: '600'}}>Recent Activites</Text>
             </View>
             <View styles= {styles.logsBox}>
@@ -104,18 +97,10 @@ const SplitExpenseEditor = () => {
             </View>
             <View style={styles.buttonBox}>
                 <View style={styles.button}>
-                    <Button
-                        title= "cancel"
-                        color="#FDB9FC"
-                        onPress={onPressCancel}
-                    />
+                    <Button title="Go back" onPress={() => navigation.goBack()} />
                 </View>
                 <View style={styles.button}>
-                    <Button
-                        title= "save"
-                        color="#ED50F1"
-                        onPress={onPressSave}
-                    /> 
+                    <Button title= "Save" onPress={onPressSave} /> 
                 </View>  
             </View>
         </View>
