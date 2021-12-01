@@ -1,13 +1,11 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Text, Button, ImageBackground, FlatList} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const SplitExpenseEditor = ({ navigation, me, partner }) => {
     const [text, onChangeText] = React.useState("");
     const [number, onChangeNumber] = React.useState(0);
     const [logs, setLogs] = React.useState([]);
-    let dataFromStorage = [];
 
     React.useEffect(() => {
         getData();
