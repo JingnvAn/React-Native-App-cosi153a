@@ -76,6 +76,7 @@ export default function App() {
         <Stack.Screen name='SettingScreen' component={SettingScreen} options={{ title: 'Log In'}}/>
       </Stack.Navigator>
     </NavigationContainer>
+
   )
 }
 
