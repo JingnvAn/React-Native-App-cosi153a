@@ -1,14 +1,13 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Text, Button, ImageBackground, FlatList} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SplitExpenseEditor = ({ navigation, me, partner }) => {
-    // const userName = 'Jingnu';
-    // const partnerName = 'Chris';
     const [text, onChangeText] = React.useState("");
     const [number, onChangeNumber] = React.useState(0);
     const [logs, setLogs] = React.useState([]);
-
+    let dataFromStorage = [];
 
     React.useEffect(() => {
         getData();
@@ -18,10 +17,10 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
         try {
           const jsonValue = await AsyncStorage.getItem('@log_info');
           let data = null
-          if (jsonValue!=null || jsonValue.length != 0) {
+          if (jsonValue != null || jsonValue.length != 0) {
             data = JSON.parse(jsonValue);
             setLogs(data);
-            console.log('just set logs', data);
+            console.log('get value from storage', data);
           } else {
             console.log('just read a null value from Storage');
           }
@@ -44,12 +43,24 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
         }
     }
 
-    const onPressSave = () => {
-        const temp = {description: text, amount:number, from:me, to:partner}
-        storeData(temp);
-        console.log(temp)
+    const clearAll = async () => {
+        try {
+          await AsyncStorage.clear()
+        } catch(e) {
+          console.dir(e)
+        }
     }
 
+    const onPressSave = () => {
+        console.log('pressed save, logs=', logs)
+        const log = {description: text, amount:number, from:me, to:partner, id:new Date().toLocaleString()};
+        const inStorage = logs;
+        inStorage.push(log);
+        setLogs(inStorage);
+        storeData(logs);
+        console.log('pushed and saved,logs=', logs)
+    }
+    console.log('before render, logs=',logs)
     return (    
         <View style={styles.container}>
             <View style={styles.header}>
@@ -70,8 +81,8 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
                 </View>
             </View>
             <View style={styles.inputBoxes}>
-                <Text style={{fontSize: 15, fontWeight: '600'}}>Add a new Split event</Text>
-                <Text>Description</Text>
+                <Text style={{fontSize: 15, fontWeight: '600', alignSelf: 'center'}}>add a new Split event</Text>
+                <Text style={{fontSize: 15, fontWeight: '500', paddingLeft:10, paddingTop:20}}>📒 Description</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeText}
@@ -79,7 +90,7 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
                     placeholder="Description"
                     keyboardType="twitter"
                 />
-                <Text>Amount</Text>
+                <Text style={{fontSize: 15, fontWeight: '500', paddingLeft:10}}>💰 Amount</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeNumber}
@@ -91,17 +102,23 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
             </View>
             <View styles= {styles.logsBox}>
                 <FlatList
-                        data={logs}
-                        renderItem={({item}) => <Text style={styles.item}>{item.from} transfered ${item.amount} to {item.to}, for {item.description}</Text>}
-                    />
+                        data={logs.reverse()}
+                        renderItem={({item}) => (
+                         <View style={{ borderWidth: 5, borderColor:'lightblue'}}>
+                            <Text style={styles.item}>📅 {item.id}: </Text>
+                            <Text style={styles.item}>💰 {item.from} owes ${item.amount} to {item.to}, for {item.description}</Text>
+                         </View>
+                        )}
+                />
             </View>
             <View style={styles.buttonBox}>
+                <Button title= 'clear all' onPress={clearAll} /> 
                 <View style={styles.button}>
                     <Button title="Go back" onPress={() => navigation.goBack()} />
                 </View>
                 <View style={styles.button}>
                     <Button title= "Save" onPress={onPressSave} /> 
-                </View>  
+                </View> 
             </View>
         </View>
 
@@ -110,11 +127,11 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 12,
         alignItems: "stretch",
         justifyContent: 'space-around',
     },
     inputBoxes: {
+        padding:15,
         flexDirection: "column",
     },
     logsBox: {
@@ -122,7 +139,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     item: {
-        padding: 10,
+        padding: 15,
         fontSize: 18,
         height: 44,
     },
