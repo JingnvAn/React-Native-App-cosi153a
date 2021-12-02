@@ -79,7 +79,7 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
                 </View>
             </View>
             <View style={styles.inputBoxes}>
-                <Text style={{fontSize: 15, fontWeight: '600', alignSelf: 'center'}}>add a new Split event</Text>
+                <Text style={{fontSize: 15, fontWeight: '600', alignSelf: 'center'}}>Add A New Expense</Text>
                 <Text style={{fontSize: 15, fontWeight: '500', paddingLeft:10, paddingTop:20}}>📒 Description</Text>
                 <TextInput
                     style={styles.input}
@@ -96,15 +96,16 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
                     placeholder="Total Amount. We'll do the calculation for you"
                     keyboardType="numeric"
                 />
-                <Text style={{fontSize: 15, fontWeight: '600'}}>Recent Activites</Text>
+                <Text style={{fontSize: 15, fontWeight: '600', paddingLeft:10, alignSelf: 'center', paddingTop:10}}>Recent Expenses</Text>
             </View>
             <View styles= {styles.logsBox}>
                 <FlatList
                         data={logs.reverse()}
                         renderItem={({item}) => (
-                         <View style={{ borderWidth: 5, borderColor:'lightblue'}}>
-                            <Text style={styles.item}>📅 {item.id}: </Text>
-                            <Text style={styles.item}>💰 {item.from} owes ${item.amount} to {item.to}, for {item.description}</Text>
+                         <View style={{ borderWidth: 3, borderColor:'lightblue', marginHorizontal:20, marginBottom:5}}>
+                            <Text style={styles.item}>👩 {item.from} ➡️ {item.to}</Text>
+                            <Text style={styles.item}>📅 {item.id} </Text>
+                            <Text style={styles.item}>💲 {item.amount}, {item.description}</Text> 
                          </View>
                         )}
                 />
