@@ -92,7 +92,7 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeNumber}
-                    value={number}
+                    value={number.toString()}
                     placeholder="Total Amount. We'll do the calculation for you"
                     keyboardType="numeric"
                 />
