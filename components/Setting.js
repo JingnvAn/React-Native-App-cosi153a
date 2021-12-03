@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Text, Image, Button, ImageBackground} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CounterContext } from './CounterContext';
 
 const Setting = ({ name, email, password, image }) => {
     const [info, setInfo] = React.useState({storedUserName: name, storedUserEmail:email || '', storedUserPassword: password || '', storedImageName: 'cartonProfilePic-circle'});
@@ -15,6 +16,8 @@ const Setting = ({ name, email, password, image }) => {
     const [inputEmail, setInputEmail] = React.useState('');
     const [inputPassword, setInputPassword] = React.useState('');
 
+    // Using useContext API
+    const { count, increment, decrement } = React.useContext(CounterContext);
 
     React.useEffect(() => {getData()}
     ,[])
@@ -104,6 +107,8 @@ const Setting = ({ name, email, password, image }) => {
                 <TextInput value={inputPassword} onChangeText={setInputPassword} style={styles.input} placeholder= 'new password ...'/>
                 <Text style={styles.guidingText}>Image Name:</Text>
                 <TextInput value={inputImageName} onChangeText={setInputImageName} style={styles.input} placeholder= 'new image name ...' />
+        
+                
                 <Button 
                     title='save all'
                     color="#ED50F1"
@@ -115,6 +120,11 @@ const Setting = ({ name, email, password, image }) => {
                     onPress={onStore}
                 />
                 
+            </View>
+            <View>
+                <Text>{`Clicked ${count} times!`}</Text>
+                <Button title="Increment" onPress={increment} />
+                <Button title="Decrement" onPress={decrement} />
             </View>
         </View>
     )
