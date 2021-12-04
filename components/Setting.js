@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput, Text, Image, Button, ImageBackground} from
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { CounterContext } from './CounterContext';
 
+
 const Setting = ({ name, email, password, image }) => {
     const [info, setInfo] = React.useState({storedUserName: name, storedUserEmail:email || '', storedUserPassword: password || '', storedImageName: 'cartonProfilePic-circle'});
 
@@ -18,6 +19,7 @@ const Setting = ({ name, email, password, image }) => {
 
     // Using useContext API
     // const { count, increment, decrement } = React.useContext(CounterContext);
+
 
     React.useEffect(() => {getData()}
     ,[])
