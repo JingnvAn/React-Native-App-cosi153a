@@ -2,23 +2,23 @@ import React from 'react';
 import { StyleSheet, Text, Button, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Navigation } from 'react-native-navigation';
-import { CounterContextProvider } from './components/CounterContext';
+// import { Navigation } from 'react-native-navigation';
+// import { CounterContextProvider } from './components/CounterContext';
 import SplitExpenseEditor from './components/SplitExpenseEditor'
 import Login from './components/Login';
 import Setting from './components/Setting';
 
 const Stack = createNativeStackNavigator();
 
-Navigation.registerComponent(
-  'Setting',
-  () => (props) => (
-    <CounterContextProvider>
-      <Setting {...props} />
-    </CounterContextProvider>
-  ),
-  () => Setting
-);
+// Navigation.registerComponent(
+//   'Setting',
+//   () => (props) => (
+//     <CounterContextProvider>
+//       <Setting {...props} />
+//     </CounterContextProvider>
+//   ),
+//   () => Setting
+// );
 
 function HomeScreen({ navigation }) {
   return (
@@ -85,7 +85,6 @@ export default function App() {
         <Stack.Screen name='SettingScreen' component={SettingScreen} options={{ title: 'Log In'}}/>
       </Stack.Navigator>
     </NavigationContainer>
-
   )
 }
 
