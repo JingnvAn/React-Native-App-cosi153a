@@ -233,7 +233,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 25, 
         marginBottom:3
-      },
+    },
+
 })
 
 export default SplitExpenseEditor;
