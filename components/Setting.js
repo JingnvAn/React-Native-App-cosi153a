@@ -123,11 +123,6 @@ const Setting = ({ name, email, password, image }) => {
                 />
                 
             </View>
-            <View>
-                <Text>{`Clicked ${count} times!`}</Text>
-                <Button title="Increment" onPress={increment} />
-                <Button title="Decrement" onPress={decrement} />
-            </View>
         </View>
     )
 }
