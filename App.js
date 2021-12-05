@@ -1,47 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, Button, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { Navigation } from 'react-native-navigation';
-// import { CounterContextProvider } from './components/CounterContext';
 import SplitExpenseEditor from './components/SplitExpenseEditor'
-import Login from './components/Login';
 import Setting from './components/Setting';
+import { Ionicons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-const Stack = createNativeStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
-// Navigation.registerComponent(
-//   'Setting',
-//   () => (props) => (
-//     <CounterContextProvider>
-//       <Setting {...props} />
-//     </CounterContextProvider>
-//   ),
-//   () => Setting
-// );
-
-
-function HomeScreen({ navigation }) {
+function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Add A Split Transaction"
-        onPress={() => {
-          navigation.navigate('SplitScreen', {
-            me: 'Jingnu',
-            partner: 'Chris',
-          });
-        }}
-      />
-      <Button 
-        title="Setting"
-        onPress={() => {
-          navigation.navigate('SettingScreen', {
-            me: 'Jingnu',
-            partner: 'Chris',
-          });
-        }}
-      />
+      <Text>Welcome to Split!</Text>
     </View>
   );
 }
@@ -53,14 +23,6 @@ const SplitScreen = ({navigation, route}) => {
       me={route.params.me} 
       partner={route.params.partner} 
     />
-  )
-}
-
-const LoginScreen = ({ navigation, route }) => {
-  return (
-    <Login 
-      navigation={navigation}
-     />
   )
 }
 
@@ -76,15 +38,25 @@ const SettingScreen = ({ navigation, route }) => {
 export default function App() {
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen 
-          name ="Home" 
-          component={HomeScreen} 
-        />
-        <Stack.Screen name="SplitScreen" component={SplitScreen} options={{ title: 'Split Expenses'}} />
-        <Stack.Screen name='LoginScreen' component={LoginScreen} options={{ title: 'Log In'}}/>
-        <Stack.Screen name='SettingScreen' component={SettingScreen} options={{ title: 'Log In'}}/>
-      </Stack.Navigator>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color }) => {
+            let iconName;
+            if (route.name === 'Home') {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === 'Settings') {
+              iconName = focused ? 'settings' : 'settings-outline';
+            } else if (route.name === 'Split'){
+              iconName = focused ? 'md-add-circle' : 'md-add-circle-outline';
+            }
+            return <Ionicons name={iconName} size={'25'} color={color} />;
+          }
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Home'}} />
+        <Tab.Screen name="Settings" component={SettingScreen} options={{ title: 'Settings'}} initialParams={{me:'Jingnu', partner:'Chris'}} />
+        <Tab.Screen name="Split" component={SplitScreen} options={{ title: 'Split Expenses'}} initialParams={{me:'Jingnu', partner: 'Chris'}} />
+      </Tab.Navigator>
     </NavigationContainer>
   )
 }
