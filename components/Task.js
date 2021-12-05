@@ -1,18 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 
 const Task = (props) => {
-  return (
-    <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <View style={styles.square}>
-            <ImageBackground source={require('../assets/chris-circle.png')} resizeMode="cover" style={styles.square}/> 
+    const paidPerson = props.paidPerson === 'Jingnu' ? '../assets/cartonProfilePic-circle.png' : '../assets/chris-circle.png';
+    const amount = props.amount;
+    const timestamp = props.timestamp;
+    const description = props.text;
+
+    return (
+        <View style={styles.item}>
+            <View style={styles.itemLeft}>
+                <View style={styles.square}>
+                    <ImageBackground source={require('../assets/cartonProfilePic-circle.png')} resizeMode="cover" style={styles.square}/> 
+                </View>
+                <View style={{flex:5}}>
+                    <Text style={styles.itemTextTitle}>{description}</Text>
+                    <Text style={styles.itemText}>{timestamp}</Text>
+                </View>
+                <View style={{flex:1}}>
+                    <Text style={styles.itemTextAmount}>${amount}</Text>
+                </View>
+            </View>
+            {/* <View style={styles.circular}></View> */}
         </View>
-        <Text style={styles.itemText}>{props.text}</Text>
-      </View>
-      <View style={styles.circular}></View>
-    </View>
-  )
+    )
 }
 
 const styles = StyleSheet.create({
@@ -36,8 +47,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginRight: 15,
   },
+  itemTextTitle: {
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  itemTextAmount: {
+    fontSize: 18,
+  },
   itemText: {
     maxWidth: '80%',
+    color: 'grey',
   },
   circular: {
     width: 12,

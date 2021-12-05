@@ -19,7 +19,7 @@ const PopupWindow = (props) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Split An Expense</Text>
-            <KeyboardAvoidingInputBox addLog={props.addLog} addLogs={props.addLogs} logs={props.logs} />
+            <KeyboardAvoidingInputBox  addLogs={props.addLogs} logs={props.logs} />
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
@@ -80,7 +80,9 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 25,
+    fontWeight: 'bold',
   }
 });
 

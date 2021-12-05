@@ -5,6 +5,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 export default function PopupWindow(props) {
   const [logName, setLogName] = useState();
   const [amount, setAmount] = useState();
+  const [paidPerson, setPaidPerson] = useState();
+
+  const onPressAdd = () => {
+    console.log('pressed add!');
+    const currLog = {description: logName, amount: amount, timestamp: new Date().toLocaleString(), paidPerson: 'Jingnu'}   
+    props.addLogs([...props.logs, currLog])    
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -20,14 +28,7 @@ export default function PopupWindow(props) {
                 <MaterialIcons style={{alignSelf:'center'}} name='attach-money' size={25} color={'gold'} />
                 <TextInput style={styles.input} value={amount} placeholder={'Amount'} onChangeText={(input) => {setAmount(input)}} />
             </View>
-            <TouchableOpacity onPress={() => {
-                {console.log('pressed!')}
-                props.addLog('hello!!');
-                Keyboard.dismiss();
-                props.addLogs([...props.logs, logName])
-                props.addLog(null);
-                }}
-            >
+            <TouchableOpacity onPress={onPressAdd}>
             <View style={styles.addWrapper}>
               <Text>➕</Text>
             </View>
