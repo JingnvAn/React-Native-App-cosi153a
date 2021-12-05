@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, Button, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, Button, View, SafeAreaView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import SplitExpenseEditor from './components/SplitExpenseEditor'
 import Setting from './components/Setting';
 import { Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Quiz5 from './practiceComponents/Quiz5';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -26,6 +27,12 @@ const SplitScreen = ({navigation, route}) => {
   )
 }
 
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}
+  </TouchableWithoutFeedback>
+);
+
 const SettingScreen = ({ navigation, route }) => {
   return (
     <Setting 
@@ -37,27 +44,31 @@ const SettingScreen = ({ navigation, route }) => {
 
 export default function App() {
   return(
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color }) => {
-            let iconName;
-            if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'settings' : 'settings-outline';
-            } else if (route.name === 'Split'){
-              iconName = focused ? 'md-add-circle' : 'md-add-circle-outline';
+    <DismissKeyboard>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color }) => {
+              let iconName;
+              if (route.name === 'Home') {
+                iconName = focused ? 'home' : 'home-outline';
+              } else if (route.name === 'Settings') {
+                iconName = focused ? 'settings' : 'settings-outline';
+              } else if (route.name === 'Split'){
+                iconName = focused ? 'md-add-circle' : 'md-add-circle-outline';
+              }
+              return <Ionicons name={iconName} size={25} color={color} />;
             }
-            return <Ionicons name={iconName} size={'25'} color={color} />;
-          }
-        })}
-      >
-        <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Home'}} />
-        <Tab.Screen name="Settings" component={SettingScreen} options={{ title: 'Settings'}} initialParams={{me:'Jingnu', partner:'Chris'}} />
-        <Tab.Screen name="Split" component={SplitScreen} options={{ title: 'Split Expenses'}} initialParams={{me:'Jingnu', partner: 'Chris'}} />
-      </Tab.Navigator>
-    </NavigationContainer>
+          })}
+        >
+          <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Home'}} />
+          <Tab.Screen name="Settings" component={SettingScreen} options={{ title: 'Settings'}} initialParams={{me:'Jingnu', partner:'Chris'}} />
+          <Tab.Screen name="Split" component={SplitScreen} options={{ title: 'Split Expenses'}} initialParams={{me:'Jingnu', partner: 'Chris'}} />
+        </Tab.Navigator>
+      </NavigationContainer>
+ 
+    </DismissKeyboard>
+
   )
 }
 

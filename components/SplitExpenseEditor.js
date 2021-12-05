@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TextInput, Text, Button, ImageBackground, FlatList, Switch, StatusBar, TouchableWithoutFeedback, Keyboard} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -9,8 +10,8 @@ const DismissKeyboard = ({ children }) => (
 );
 
 const SplitExpenseEditor = ({ navigation, me, partner }) => {
-    const [text, onChangeText] = useState("");
-    const [number, onChangeNumber] = useState(0);
+    const [text, onChangeText] = useState('');
+    const [number, onChangeNumber] = useState('');
     const [logs, setLogs] = useState([]);
     const [isEnabled, setIsEnabled] = useState(false);
 
@@ -37,8 +38,6 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
         }
   }
 
-    // storeData converts the value stored in the info variable to a string
-    // which is then writes into local storage using AsyncStorage.setItem.
     const storeData = async (value) => {
         try {
             const jsonValue = JSON.stringify(value);
@@ -63,7 +62,7 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
         console.log('pressed save, logs=', logs)
         const moneyFrom = isEnabled ? me : partner;
         const moneyTo = isEnabled ? partner : me;
-        const log = {description: text, amount:number *1.0 / 2, from:moneyFrom, to:moneyTo, id:new Date().toLocaleString()};
+        const log = {description: text, amount: parseFloat(number) / 2, from:moneyFrom, to:moneyTo, id:new Date().toLocaleString()};
         const inStorage = logs.reverse();
         inStorage.push(log);
         const reversed = inStorage.reverse();
@@ -106,12 +105,17 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
     );
 
     const renderItem = ({ item }) => (
-        <ListItem item={item}/>
+            <ListItem item={item}/>   
     );
 
     return (  
-        <DismissKeyboard>  
+        // <DismissKeyboard> 
             <View style={styles.container}>
+                <SafeAreaView style={styles.buttonBox}>                        
+                    <Button color='black' title="Cancel" onPress={() => navigation.goBack()} />
+                    <Button color='black' title= 'Settle all' onPress={clearAll} /> 
+                    <Button color='black' title= "Save" onPress={onPressSave} />          
+                </SafeAreaView> 
                 <View style={styles.header}>
                     <View style={styles.headerProfile}>
                         <View style={styles.image}>
@@ -135,6 +139,7 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
                         <Text style={styles.name}>{partner}</Text>                      
                     </View>
                 </View>
+                
                 <View style={styles.inputBoxes}>
                     <Text style={{fontSize: 15, fontWeight: '600', alignSelf: 'center', marginTop: 20}}>Who paid this time?</Text>
                     <Text style={{fontSize: 15, fontWeight: '600', alignSelf: 'center', color:'blue'}}>{isEnabled ? `${partner} paid` : `${me} paid` }</Text>
@@ -150,57 +155,54 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
                     <TextInput
                         style={styles.input}
                         onChangeText={onChangeNumber}
-                        value={number}
+                        value={number.toString()}
                         placeholder="Total Amount. We'll do the calculation for you"
                         keyboardType="numeric"
                     />
                 </View>
+                
+
                 <View styles= {styles.listContainer}>
                     <Text style={{fontSize: 15, fontWeight: '600', paddingLeft:10, alignSelf: 'center', paddingTop:20, paddingBottom: 10}}>Recent Expenses</Text>
                     <FlatList
                         data={logs}
                         renderItem={renderItem}
                     />
-                </View>
-                <View style={styles.buttonBox}>
-                    <View style={styles.button}>
-                        <Button title= 'Settle all' onPress={clearAll} /> 
-                    </View>
-                    <View style={styles.button}>
-                        <Button title="Go back" onPress={() => navigation.goBack()} />
-                    </View>
-                    <View style={styles.button}>
-                        <Button title= "Save" onPress={onPressSave} /> 
-                    </View> 
-                </View>          
+                </View>   
+
             </View>
-        </DismissKeyboard>
+        // {/* </DismissKeyboard> */}
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         backgroundColor:'green',
-        alignItems: "stretch",
-        justifyContent: 'space-around',
+    },
+    buttonBox: {
+        flex:0.7,
+        backgroundColor:'red',
+        flexDirection: 'row', 
+        justifyContent:'space-between'
     },
     header: {
-        // backgroundColor:'grey',
+        flex:1,
+        backgroundColor:'grey',
         flexDirection: 'row',
-        padding: 15,
+        // padding: 15,
     },
     inputBoxes: {
+        flex:4,
         backgroundColor:'yellow',
-         // padding:15,
+        padding:15,
         flexDirection: "column",
         // marginBottom:20,
     },
-    buttonBox: {
-        backgroundColor:'red',
-        padding: 10,
-        flexDirection: "row",
-        alignItems: 'center',
-        justifyContent: 'center',
+    listContainer: {
+        flex:6,
+        backgroundColor:'green',
+        marginTop: StatusBar.currentHeight || 0,
     },
     input: {
         height: 40,
@@ -228,22 +230,20 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 18,
     },
-    button: {
-        marginTop:40,
-    },
-    listContainer: {
-        backgroundColor:'green',
-        marginTop: StatusBar.currentHeight || 0,
-      },
     item: {
         fontSize: 15,
     },
     itemList: {
+        flex:1,
         backgroundColor: "#FFDEFA",
         padding: 8,
         marginVertical: 10,
         marginHorizontal: 25, 
         marginBottom:3
+    },
+    box: {
+        width: 50,
+        height: 50,
     },
 })
 
