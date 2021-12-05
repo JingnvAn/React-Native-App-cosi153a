@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 
 const Task = (props) => {
-    const paidPerson = props.paidPerson === 'Jingnu' ? '../assets/cartonProfilePic-circle.png' : '../assets/chris-circle.png';
+    const paidPerson = props.paidPerson;
     const amount = props.amount;
     const timestamp = props.timestamp;
     const description = props.text;
@@ -11,14 +11,19 @@ const Task = (props) => {
         <View style={styles.item}>
             <View style={styles.itemLeft}>
                 <View style={styles.square}>
-                    <ImageBackground source={require('../assets/cartonProfilePic-circle.png')} resizeMode="cover" style={styles.square}/> 
+                    {paidPerson === 'Jingnu' ? 
+                    <ImageBackground source={require('../assets/cartonProfilePic-circle.png')} resizeMode="cover" style={styles.square}/>
+                    :
+                    <ImageBackground source={require('../assets/chris-circle.png')} resizeMode="cover" style={styles.square}/>
+                }
+                     
                 </View>
-                <View style={{flex:5}}>
+                <View style={{flex:3}}>
                     <Text style={styles.itemTextTitle}>{description}</Text>
                     <Text style={styles.itemText}>{timestamp}</Text>
                 </View>
                 <View style={{flex:1}}>
-                    <Text style={styles.itemTextAmount}>${amount}</Text>
+                    <Text style={styles.itemTextAmount}>${(parseFloat(amount)/2).toFixed(2)}</Text>
                 </View>
             </View>
             {/* <View style={styles.circular}></View> */}
