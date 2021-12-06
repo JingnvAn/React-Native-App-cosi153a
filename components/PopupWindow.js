@@ -28,7 +28,7 @@ const PopupWindow = (props) => {
                             style={[styles.button, ]}
                             onPress={() => setModalVisible(!modalVisible)}
                         >
-                            <Ionicons name='close-circle' color='black' size='30' />
+                            <Ionicons name='close-circle' color='black' size={30} />
                         </Pressable>
                     </View>
                 </View>

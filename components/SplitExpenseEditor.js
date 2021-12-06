@@ -75,22 +75,6 @@ const SplitExpenseEditor = ({ navigation, me, partner }) => {
         console.log('pushed and saved,logs=', logs)
     }
 
-    // const onPressDelete = (id) => {
-    //     const logsCopy = logs;
-    //     let index = -1;
-    //     logsCopy.forEach((item) => {
-    //         if(item.id == id){
-    //             index = logsCopy.indexOf(item);
-    //         }
-
-    //     })
-    //     if (index > -1) {
-    //         logsCopy.splice(index, 1);
-    //     }
-    //     console.log('delete, logs', logsCopy)
-    //     setLogs(logsCopy);
-    // }
-
     const ListItem = ({ item }) => (
         <View style={styles.itemList}>
             <Text style={styles.item}>📒 {item.description}</Text>
