@@ -7,4 +7,6 @@ This app allows a couple to manage their split expenses. It’s not easy to reme
 This project uses React Native, React Native Navigation. A full dependency list can be found through package.json
 
 #### Screenshot
-[image](./assets/screenshot.png)
+[split an expense page 1](./assets/add-page1.png)
+[split an expense page 2](./assets/add-page2.png)
+[most recent activities page](./assets/list-page.png)

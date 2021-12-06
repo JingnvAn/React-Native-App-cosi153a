@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import KeyboardAvoidingInputBox from './KeyboardAvoidingInputBox';
-
+import { Ionicons } from '@expo/vector-icons';
 const PopupWindow = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   
@@ -17,16 +17,23 @@ const PopupWindow = (props) => {
         }}
       >
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Split An Expense</Text>
-            <KeyboardAvoidingInputBox addLog={props.addLog} addLogs={props.addLogs} logs={props.logs} />
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Close</Text>
-            </Pressable>
-          </View>
+            <View style={styles.modalView}>
+                <View style={{flexDirection:'row', justifyContent:'space-evenly', alignItems:'center'}}>
+                    <View style={{flex:5}}>
+                        <Text style={styles.modalText}>Split An Expense</Text>
+                    </View>
+                    <View style={{flex:0.1}}></View>
+                    <View style={{flex:1}}>
+                        <Pressable
+                            style={[styles.button, ]}
+                            onPress={() => setModalVisible(!modalVisible)}
+                        >
+                            <Ionicons name='close-circle' color='black' size={30} />
+                        </Pressable>
+                    </View>
+                </View>
+                <KeyboardAvoidingInputBox  addLogs={props.addLogs} logs={props.logs} size='30'/>
+            </View>
         </View>
       </Modal>
         <Pressable
@@ -34,7 +41,7 @@ const PopupWindow = (props) => {
         onPress={() => {
              setModalVisible(true)
         }}>
-        <Text style={styles.textStyle}>Add    </Text>
+        <Text style={styles.textStyle}>Add           </Text>
         </Pressable>
     </View>
   );
@@ -74,13 +81,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196F3",
   },
   textStyle: {
+    fontSize: 18,
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  textStyleClose: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center"
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center"
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignSelf:'center',
   }
 });
 

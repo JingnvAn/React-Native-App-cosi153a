@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Keyboard, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import PopupWindow from './PopupWindow';
 import Task from './Task';
 
 export default function SplitPretty() {
-    const [log, setLog] = useState();
     const [logs, setLogs] = useState([]);
-  
-    const completeTask = (index) => {
+
+
+    const deleteTask = (index) => {
       let itemsCopy = [...logs];
       itemsCopy.splice(index, 1);
       setLogs(itemsCopy)
@@ -19,23 +19,19 @@ export default function SplitPretty() {
                 <Text style={styles.sectionTitle}>Recent Activities</Text>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps='handled' >
                     <View style={styles.tasksWrapper}>
-                        
                         <View style={styles.items}>
-                        {/* This is where the tasks will go! */}
                         {logs.map((item, index) => {
-                            return (
-                                <TouchableOpacity key={index}  onPress={() => completeTask(index)}>
-                                    <Task text={item} /> 
-                                </TouchableOpacity>
-                            )
+                            return (<TouchableOpacity key={index}  onPress={() => deleteTask(index)}>
+                                        {/* <Task text={item.title} amount={item.amount} timestamp={item.timestamp} paidPerson={item.paidPerson} />  */}
+                                        <Task text={item.description} amount={item.amount} timestamp={item.timestamp} paidPerson={item.paidPerson}  /> 
+                                    </TouchableOpacity>)
                         })}
                         </View>
                     </View>    
                 </ScrollView>
-            </SafeAreaView>
-            
-            <View style={styles.writeTaskWrapper}>
-                <PopupWindow addLog={(log) => setLog(log)} addLogs={(logs) => setLogs(logs)} logs={logs} /> 
+            </SafeAreaView>    
+            <View style={styles.addButtonBox}>
+                <PopupWindow  addLogs={(logs) => setLogs(logs)} logs={logs} /> 
             </View>
         </View>
       );
@@ -66,32 +62,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'flex-start',
     },
-    writeTaskWrapper: {
+    addButtonBox: {
       position: 'absolute',
       bottom: 20,
       width: '100%',
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center'
-    },
-    input: {
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        backgroundColor: '#FFF',
-        borderRadius: 60,
-        borderColor: '#C0C0C0',
-        borderWidth: 1,
-        width: 250,
-    },
-    addWrapper: {
-        width: 60,
-        height: 60,
-        backgroundColor: '#FFF',
-        borderRadius: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: '#C0C0C0',
-        borderWidth: 1,
     },
   });
 

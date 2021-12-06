@@ -19,11 +19,6 @@ function HomeScreen() {
 
 const SplitScreen = ({navigation, route}) => {
   return (
-    // <SplitExpenseEditor 
-    //   navigation={navigation} 
-    //   me={route.params.me} 
-    //   partner={route.params.partner} 
-    // />
     <SplitPretty />
   )
 }
@@ -52,10 +47,11 @@ export default function App() {
               iconName = focused ? 'md-add-circle' : 'md-add-circle-outline';
             }
             return <Ionicons name={iconName} size={25} color={color} />;
-          }
+          },
         })}
+        barStyle={{ backgroundColor: '#ffff' }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Home'}} />
+        <Tab.Screen name="Home" component={HomeScreen}  />
         <Tab.Screen name="Settings" component={SettingScreen} options={{ title: 'Settings'}} initialParams={{me:'Jingnu', partner:'Chris'}} />
         <Tab.Screen name="Split" component={SplitScreen} options={{ title: 'Split Expenses'}} initialParams={{me:'Jingnu', partner: 'Chris'}} />
       </Tab.Navigator>
