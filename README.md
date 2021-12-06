@@ -14,3 +14,7 @@ This project uses React Native, React Native Navigation. A full dependency list 
 
 
 [most recent activities page](./assets/list-page.png)
+
+
+#### Demo Video
+https://drive.google.com/file/d/1cMHUSafhs87Qk8EucFJf-VnVYibbdZIc/view?usp=sharing 
