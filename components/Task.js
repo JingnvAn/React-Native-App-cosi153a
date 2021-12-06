@@ -23,7 +23,7 @@ const Task = (props) => {
                     <Text style={styles.itemText}>{timestamp}</Text>
                 </View>
                 <View style={{flex:1}}>
-                    <Text style={styles.itemTextAmount}>${(parseFloat(amount)/2).toFixed(2)}</Text>
+                    <Text style={styles.itemTextAmount}>${(parseFloat(amount)/2).toFixed(1)}</Text>
                 </View>
             </View>
             {/* <View style={styles.circular}></View> */}

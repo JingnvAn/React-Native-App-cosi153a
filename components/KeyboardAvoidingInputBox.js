@@ -11,7 +11,6 @@ export default function PopupWindow(props) {
 
 
   const onPressAdd = () => {
-    console.log('pressed add!');
     let paidPerson = 'Jingnu';
     if(isEnabled){
         paidPerson = 'Chris';
@@ -59,7 +58,7 @@ export default function PopupWindow(props) {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <MaterialIcons style={{alignSelf:'center'}} name='attach-money' size={25} color={'gold'} />
-                    <TextInput style={styles.input} value={amount.toString()} keyboardType={'numeric'} placeholder={'Amount'} onChangeText={setAmount} />
+                    <TextInput style={styles.input} value={amount.toString()} keyboardType={'numeric'} placeholder={'Total amount, will be split into halves'} onChangeText={setAmount} />
                 </View>
                 <TouchableOpacity onPress={onPressAdd}>
                     <View style={styles.addWrapper}>

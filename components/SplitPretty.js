@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Keyboard, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import PopupWindow from './PopupWindow';
 import Task from './Task';
 
 export default function SplitPretty() {
-    const [log, setLog] = useState();
     const [logs, setLogs] = useState([]);
-    const [amount, setAmount] = useState();
 
-    const completeTask = (index) => {
+
+    const deleteTask = (index) => {
       let itemsCopy = [...logs];
       itemsCopy.splice(index, 1);
       setLogs(itemsCopy)
@@ -22,7 +21,7 @@ export default function SplitPretty() {
                     <View style={styles.tasksWrapper}>
                         <View style={styles.items}>
                         {logs.map((item, index) => {
-                            return (<TouchableOpacity key={index}  onPress={() => completeTask(index)}>
+                            return (<TouchableOpacity key={index}  onPress={() => deleteTask(index)}>
                                         {/* <Task text={item.title} amount={item.amount} timestamp={item.timestamp} paidPerson={item.paidPerson} />  */}
                                         <Task text={item.description} amount={item.amount} timestamp={item.timestamp} paidPerson={item.paidPerson}  /> 
                                     </TouchableOpacity>)
