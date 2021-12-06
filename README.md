@@ -8,5 +8,9 @@ This project uses React Native, React Native Navigation. A full dependency list 
 
 #### Screenshot
 [split an expense page 1](./assets/add-page1.png)
+
+
 [split an expense page 2](./assets/add-page2.png)
+
+
 [most recent activities page](./assets/list-page.png)
