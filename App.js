@@ -12,7 +12,7 @@ const Tab = createMaterialBottomTabNavigator();
 function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Welcome to Split!</Text>
+      <Text style={styles.title}>Welcome to Split!</Text>
     </View>
   );
 }
@@ -60,26 +60,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin:10,
-    borderWidth:3,
-    borderColor:'black',
-  },
-  image: {
-    flex: 1,
-    justifyContent: "center"
-  },
-  homeScreen:{
-    flex:1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  title: {
+    color: "#F194FF",
+    fontSize: 35,
+    fontWeight: 'bold'
   },
 });
