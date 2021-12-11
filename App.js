@@ -53,6 +53,7 @@ export default function App() {
         },
       })}
       barStyle={{ backgroundColor: '#ffff' }}
+      initialRouteName='Login'
     >
       <Tab.Screen name="Home" component={HomeScreen}  />
       <Tab.Screen name="Settings" component={SettingScreen} options={{ title: 'Settings'}} initialParams={{me:'Jingnu', partner: 'Chris'}} />
