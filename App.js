@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Setting from './components/Setting';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import SplitPretty from './components/SplitPretty';
@@ -15,12 +15,6 @@ const Stack = createStackNavigator();
 const SplitScreen = () => {
   return (
     <SplitPretty />
-  )
-}
-
-const Home = () => {
-  return (
-    <HomeScreen />
   )
 }
 
@@ -52,7 +46,9 @@ export default function App() {
             iconName = focused ? 'settings' : 'settings-outline';
           } else if (route.name === 'Split'){
             iconName = focused ? 'md-add-circle' : 'md-add-circle-outline';
-          } 
+          } else if( route.name === 'Login'){
+            return <MaterialIcons name='login' size={25} color={color} />
+          }
           return <Ionicons name={iconName} size={25} color={color} />;
         },
       })}
